@@ -1,0 +1,19 @@
+version: '2'
+services:
+  user_db:
+    image: mysql
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: apuesta 
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: user
+      MYSQL_HOST: user_db
+  user_ms:
+    build: .
+    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - user_db
