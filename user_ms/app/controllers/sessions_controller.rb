@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def show
     current_user = User.where(authentication_token: params[:authentication_token]).first
   	if current_user
-  		render json: current_user.as_json(except: [:id, :password]), status: :aacepted
+  		render json: current_user.as_json(except: [:id, :password]), status: :accepted
   	else
   		head(:unauthorized)
   	end
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     current_user = User.where(authentication_token: params[:authentication_token]).first
   	current_user&.authentication_token = nil
   	if current_user.save
-  		head(:ok)
+  		render json: current_user.as_json(only: [:id]), status: :ok
   	else
   		head(:unauthorized)
   	end
