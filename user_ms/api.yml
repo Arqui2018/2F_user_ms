@@ -1,0 +1,128 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for Match and Teams
+  description: Node JS + MySQL
+  license:
+    name: Software Architecture 2018-I
+host: 18.233.69.134:4001
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /sessions/{token}:
+    get:
+      summary: Returns User with authentication_token equal to token
+      operationId: sessionByToken
+      parameters:
+        - name: token
+          in: path
+          description: The token of the session to be returned
+          required: true
+          type: token
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/User'
+        '406':
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Destroy the session
+      operationId: removeSession
+      parameters:
+        - name: token
+          in: path
+          description: The token of the session to be destroyed
+          required: true
+          type: token
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/User'
+        '406':
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /sessions:
+    post:
+      summary: Create a new session
+      operationId: createSession
+      parameters:
+        - name: email
+          in: body
+          description: The user's email
+          required: true
+          type: string
+        - name: password
+          in: body
+          description: The user's password
+          required: true
+          type: password
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/User'
+        '406':
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+definitions:
+
+  # User
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      email:
+        type: string
+      name:
+        type: string
+      nickname:
+        type: string
+      wallet_id:
+        type: integer
+      authentication_token:
+        type: token
+      createdAt:
+        type: string
+      updatedAt:
+        type: string
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - message
+      - code
+    properties:
+      message:
+        type: string
+      code:
+        type: number
+      description:
+        type: object
