@@ -8,3 +8,5 @@ ADD Gemfile.lock /user_ms/Gemfile.lock
 
 RUN bundle install
 ADD . /user_ms
+
+EXPOSE 4001
