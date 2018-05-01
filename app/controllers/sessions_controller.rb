@@ -1,3 +1,5 @@
+require 'net/ldap'
+
 class SessionsController < ApplicationController
 
   def show
