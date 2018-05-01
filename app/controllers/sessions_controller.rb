@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
         user = User.where(email: email).first
         if user&.valid_password?(password)
         	render json: user.as_json(only: [:email, :authentication_token]), status: :created
-          logger.info "authentication was succefull"
+          logger.info "authentication was successful"
         else
         	head(:unauthorized)
           logger.info "user isn't in the database"
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
   private
     def connect
       ldap = Net::LDAP.new(
-        host: 'academy-ldap',
+        host: 'bet-ldap',
         port: 389,
         auth: {
           method: :simple,
