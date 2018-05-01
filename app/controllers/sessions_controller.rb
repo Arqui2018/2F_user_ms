@@ -12,9 +12,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    email = params[:email]
+    email = params[:email].downcase
     password = params[:password]
-    email = email[/\A\w+/].downcase
+    logger.info email
+    logger.info password
     if connect
       ldap = Net::LDAP.new(
         host: 'bet-ldap',
