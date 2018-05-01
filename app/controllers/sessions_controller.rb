@@ -28,11 +28,14 @@ class SessionsController < ApplicationController
         user = User.where(email: email).first
         if user&.valid_password?(password)
         	render json: user.as_json(only: [:email, :authentication_token]), status: :created
+          logger.info "authentication was succefull"
         else
         	head(:unauthorized)
+          logger.info "user isn't in the database"
         end
       else
         head(:unauthorized)
+        logger.info "user isn't in the ldap"
       end
 
     end
