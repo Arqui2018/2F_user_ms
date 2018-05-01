@@ -44,5 +44,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'execjs'
 # Used to manage the sign in and sign out
 gem 'devise'
-#Simple token authentication allow keep the session
+# Simple token authentication allow keep the session
 gem 'simple_token_authentication', '~> 1.15', '>= 1.15.1'
+# ldap
+gem 'net-ldap'
