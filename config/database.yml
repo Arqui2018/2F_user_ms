@@ -10,13 +10,9 @@
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: 1234
-  host: user_db
-  socket: /tmp/mysql.sock
+  timeout: 5000
 
 development:
   <<: *default
@@ -50,6 +46,11 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: user_ms_production
-  username: user_ms
+  username: root
+  password: 1234
+  host: user_db
   password: <%= ENV['USER_MS_DATABASE_PASSWORD'] %>

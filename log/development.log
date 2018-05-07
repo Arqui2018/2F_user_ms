@@ -1,0 +1,1129 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (365.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (353.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20180316002059)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180316002059"]]
+  [1m[35m (348.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddAuthenticationTokenToUsers (20180316215609)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "authentication_token" varchar(30)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "nickname" varchar[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "wallet_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "name" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_authentication_token" ON "users" ("authentication_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180316215609"]]
+  [1m[35m (321.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-05-07 03:04:22.424314"], ["updated_at", "2018-05-07 03:04:22.424314"]]
+  [1m[35m (317.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_authentication_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_authentication_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "bx6c3gYzskpjs_MaoC2i"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "authentication_token", "wallet_id", "name") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "dago@bet.com.co"], ["encrypted_password", "$2a$11$rj05GkLJCOLcPSWtixXUHeS5mm9RvJxoip0EBEmLr3KHTD2WtHsfe"], ["created_at", "2018-05-07 03:06:49.782437"], ["updated_at", "2018-05-07 03:06:49.782437"], ["authentication_token", "bx6c3gYzskpjs_MaoC2i"], ["wallet_id", 1], ["name", "dago"]]
+  [1m[35m (362.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "authentication_token", "wallet_id", "name") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "jhon@bet.com.co"], ["encrypted_password", "$2a$11$/MD7KXvWI26Zt2PDeeKQAe3cL6G9TMHOuXDnxwGdYy8kgaMeawqWW"], ["created_at", "2018-05-07 03:06:50.294077"], ["updated_at", "2018-05-07 03:06:50.294077"], ["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["wallet_id", 2], ["name", "jhon"]]
+  [1m[35m (355.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "cristian@bet.com.co"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "ygn-H7KJzysqsUQf9yWB"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "authentication_token", "wallet_id", "name") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "cristian@bet.com.co"], ["encrypted_password", "$2a$11$kr30Uu.c3TcC1VXdCu2C8epRtEDTaLxqxyNoYgshrz8Zlqm7GhEtW"], ["created_at", "2018-05-07 03:06:50.796334"], ["updated_at", "2018-05-07 03:06:50.796334"], ["authentication_token", "ygn-H7KJzysqsUQf9yWB"], ["wallet_id", 3], ["name", "cristian"]]
+  [1m[35m (364.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "f-Jky4XveZCGxiFkNLTr"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "authentication_token", "wallet_id", "name") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "camilo@bet.com.co"], ["encrypted_password", "$2a$11$LFUJZoygu5CZf4taRlKebeBlTeX0ANpMejiSAzDe1pPstuBPhBe0O"], ["created_at", "2018-05-07 03:06:51.308471"], ["updated_at", "2018-05-07 03:06:51.308471"], ["authentication_token", "f-Jky4XveZCGxiFkNLTr"], ["wallet_id", 4], ["name", "camilo"]]
+  [1m[35m (736.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:08:18 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:8: syntax error, unexpected ':', expecting '}'
+...tring, :wallet_id => :integer :autentication => :boolean }
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+... :wallet_id => user.wallet_id :autentication => true }
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+...> "none", :nickname => "none" :email => "none", wallet_id =>...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+...ame => "none" :email => "none", wallet_id => 0, :autenticati...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/sessions_controller.rb:8: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/favicon.ico" for 127.0.0.1 at 2018-05-06 22:08:18 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.3) lib/puma/configuration.rb:225:in `call'
+puma (3.11.3) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.3) lib/puma/server.rb:438:in `process_client'
+puma (3.11.3) lib/puma/server.rb:302:in `block in run'
+puma (3.11.3) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/favicon.ico" for 127.0.0.1 at 2018-05-06 22:08:18 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.3) lib/puma/configuration.rb:225:in `call'
+puma (3.11.3) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.3) lib/puma/server.rb:438:in `process_client'
+puma (3.11.3) lib/puma/server.rb:302:in `block in run'
+puma (3.11.3) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:08:40 -0500
+  
+SyntaxError (/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+... :wallet_id => user.wallet_id :autentication => true }
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+...> "none", :nickname => "none" :email => "none", wallet_id =>...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+...ame => "none" :email => "none", wallet_id => 0, :autenticati...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:08:42 -0500
+  
+SyntaxError (/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+... :wallet_id => user.wallet_id :autentication => true }
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+...> "none", :nickname => "none" :email => "none", wallet_id =>...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+...ame => "none" :email => "none", wallet_id => 0, :autenticati...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:08:49 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+... :wallet_id => user.wallet_id :autentication => true }
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+...> "none", :nickname => "none" :email => "none", wallet_id =>...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+...ame => "none" :email => "none", wallet_id => 0, :autenticati...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/sessions_controller.rb:13: syntax error, unexpected tSYMBEG, expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:09:15 -0500
+  
+SyntaxError (/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+...> "none", :nickname => "none" :email => "none", wallet_id =>...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+...ame => "none" :email => "none", wallet_id => 0, :autenticati...
+...                               ^
+/home/jhon/Documents/github/apuesta_mundial/2F_user_ms/app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ':', expecting '}'
+app/controllers/sessions_controller.rb:15: syntax error, unexpected ',', expecting keyword_end
+app/controllers/sessions_controller.rb:77: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:09:30 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (38.0ms)
+Completed 200 OK in 125ms (Views: 124.6ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:09:56 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (7.5ms)
+Completed 200 OK in 10ms (Views: 9.8ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:10:58 -0500
+Processing by SessionsController#createSession as HTML
+Completed 401 Unauthorized in 89ms
+
+
+  
+Net::LDAP::Error (getaddrinfo: Name or service not known):
+  
+app/controllers/sessions_controller.rb:74:in `connect'
+app/controllers/sessions_controller.rb:27:in `createSession'
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:13:29 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (2.9ms)
+Completed 200 OK in 7ms (Views: 6.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:14:13 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 401 Unauthorized in 303ms (Views: 97.8ms | ActiveRecord: 1.7ms)
+
+
+  
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  
+app/controllers/sessions_controller.rb:46:in `createSession'
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:14:28 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (5.1ms)
+Completed 401 Unauthorized in 207ms (Views: 8.4ms | ActiveRecord: 1.2ms)
+
+
+  
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  
+app/controllers/sessions_controller.rb:46:in `createSession'
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:15:09 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 171ms (Views: 2.6ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:15:39 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 178ms (Views: 2.3ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:15:50 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (5.1ms)
+Completed 200 OK in 200ms (Views: 8.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:16:48 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (3.2ms)
+Completed 200 OK in 5ms (Views: 4.6ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:16:52 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 173ms (Views: 2.3ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:16:54 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 155ms (Views: 2.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:19:01 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (5.4ms)
+Completed 200 OK in 203ms (Views: 8.5ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:19:50 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (5.5ms)
+Completed 200 OK in 216ms (Views: 8.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:21:25 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (9.9ms)
+Completed 200 OK in 13ms (Views: 12.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:22:08 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 266ms (Views: 1.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:24:01 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (8.1ms)
+Completed 200 OK in 10ms (Views: 10.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:24:39 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (16.6ms)
+Completed 200 OK in 19ms (Views: 18.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:25:15 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.5ms)
+Completed 200 OK in 165ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:26:44 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (4.3ms)
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:27:12 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+I am here
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 153ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:27:44 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jvhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 12ms (Views: 2.4ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:27:45 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jvhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:27:59 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 168ms (Views: 1.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:28:05 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 172ms (Views: 2.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:28:06 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 148ms (Views: 1.9ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:28:10 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 160ms (Views: 1.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:28:16 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 154ms (Views: 2.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:28:36 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (3.6ms)
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:28:45 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 153ms (Views: 1.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:29:22 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (7.2ms)
+Completed 200 OK in 11ms (Views: 11.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:29:26 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 189ms (Views: 2.1ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:29:40 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 159ms (Views: 2.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:00 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 174ms (Views: 2.2ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:14 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 149ms (Views: 1.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:16 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 149ms (Views: 1.9ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:17 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 146ms (Views: 1.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:22 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 153ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:26 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 149ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:31 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "cafffmilo@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:32 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "cafffmilo@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.4ms)
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:32 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "cafffmilo@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:36 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.3ms)
+Completed 200 OK in 7ms (Views: 4.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:37 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 6ms (Views: 3.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:37 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:37 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.2ms)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:37 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.6ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:38 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.2ms)
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:38 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 7ms (Views: 2.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:30:38 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:32:16 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@betdfdf.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 16ms (Views: 3.8ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:32:34 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 164ms (Views: 2.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:32:51 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+Completed 401 Unauthorized in 121ms (ActiveRecord: 0.4ms)
+
+
+  
+NameError (undefined local variable or method `wallet_id' for #<SessionsController:0x000000019096a0>):
+  
+app/controllers/sessions_controller.rb:15:in `showSession'
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:34:24 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (6.9ms)
+Completed 200 OK in 14ms (Views: 13.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:34:32 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.8ms)
+Completed 200 OK in 18ms (Views: 3.4ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:34:43 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 179ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:34:45 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 158ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:34:55 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.3ms)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:35:45 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (4.5ms)
+Completed 200 OK in 6ms (Views: 6.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:35:49 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.7ms)
+Completed 200 OK in 12ms (Views: 3.8ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:36:04 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 11ms (Views: 3.0ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:36:31 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.4ms)
+Completed 200 OK in 12ms (Views: 3.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:37:03 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (5.6ms)
+Completed 200 OK in 8ms (Views: 8.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:37:39 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+Completed 401 Unauthorized in 9ms (ActiveRecord: 1.1ms)
+
+
+  
+NoMethodError (undefined method `name' for nil:NilClass):
+  
+app/controllers/sessions_controller.rb:13:in `showSession'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:47:10 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (7.0ms)
+Completed 200 OK in 9ms (Views: 9.0ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:47:16 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+Completed 401 Unauthorized in 11ms (ActiveRecord: 1.6ms)
+
+
+  
+NoMethodError (undefined method `email' for nil:NilClass):
+  
+app/controllers/sessions_controller.rb:13:in `showSession'
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:48:23 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (4.3ms)
+Completed 200 OK in 18ms (Views: 7.0ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:48:51 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 12ms (Views: 2.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:49:27 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (3.8ms)
+Completed 200 OK in 6ms (Views: 5.9ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:49:31 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+#<User:0x00000003c1f978>
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 33ms (Views: 2.1ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:50:12 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (4.6ms)
+Completed 200 OK in 7ms (Views: 6.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:50:16 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 14ms (Views: 2.4ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:50:18 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:50:23 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "jhon@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 162ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:50:38 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:50:40 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" IS NULL ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:11 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 25ms (Views: 2.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:13 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.2ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:18 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:24 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.2ms)
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:25 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:31 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-ffd9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.5ms)
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:32 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-ffd9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:32 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-ffd9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.7ms)
+Completed 200 OK in 8ms (Views: 3.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:32 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-ffd9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:33 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-ffd9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 5ms (Views: 2.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:36 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:37 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "sE-J-9ZHpupk5xKcRRvw"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.2ms)
+Completed 200 OK in 8ms (Views: 5.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:43 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dago@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 145ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:54 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "bx6c3gYzskpjs_MaoC2i"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.3ms)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:55 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "bx6c3gYzskpjs_MaoC2i"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.3ms)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:56 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "bx6c3gYzskpjs_MaoC2i"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:51:56 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "bx6c3gYzskpjs_MaoC2i"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.4ms)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:52:04 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "camilo@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.7ms)
+Completed 200 OK in 147ms (Views: 1.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:52:15 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jky4XveZCGxiFkNLTr"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:52:16 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jky4XveZCGxiFkNLTr"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:52:18 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jky4XveZCGxiFkNLTr"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:52:20 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jky4XvfdfddeZCGxiFkNLTr"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.0ms)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/sessions/wsdl" for 127.0.0.1 at 2018-05-06 22:52:59 -0500
+Processing by SessionsController#_generate_wsdl as HTML
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/wsdl.builder (5.1ms)
+Completed 200 OK in 8ms (Views: 7.8ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:53:11 -0500
+Processing by SessionsController#destroySession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jky4XveZCGxiFkNLTr"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "7bb5b9B3Zqy2YB_sxdbm"]]
+  [1m[35mSQL (94.3ms)[0m  [1m[33mUPDATE "users" SET "authentication_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["authentication_token", "7bb5b9B3Zqy2YB_sxdbm"], ["updated_at", "2018-05-07 03:53:11.696825"], ["id", 4]]
+  [1m[35m (407.7ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 546ms (Views: 2.6ms | ActiveRecord: 504.4ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:53:18 -0500
+Processing by SessionsController#destroySession as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "f-Jkddy4XveZCGxiFkNLTr"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+NoMethodError (undefined method `save' for nil:NilClass):
+  
+app/controllers/sessions_controller.rb:58:in `destroySession'
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:53:46 -0500
+Processing by SessionsController#createSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "cristian@bet.com.co"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.8ms)
+Completed 200 OK in 146ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:53:58 -0500
+Processing by SessionsController#showSession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "ygn-H7KJzysqsUQf9yWB"], ["LIMIT", 1]]
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (1.1ms)
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:54:07 -0500
+Processing by SessionsController#destroySession as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "ygn-H7KJzysqsUQf9yWB"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."authentication_token" = ?[0m  [["authentication_token", "yeM8B64XcfuKmp59osB8"]]
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "users" SET "authentication_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["authentication_token", "yeM8B64XcfuKmp59osB8"], ["updated_at", "2018-05-07 03:54:07.345439"], ["id", 3]]
+  [1m[35m (413.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder
+  Rendered /var/lib/gems/2.3.0/gems/wash_out-0.12.0/app/views/wash_out/rpc/response.builder (0.9ms)
+Completed 200 OK in 421ms (Views: 2.3ms | ActiveRecord: 414.1ms)
+
+
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:54:36 -0500
+Processing by SessionsController#destroySession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "ygn-H7KJffzysqsUQf9yWB"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+NoMethodError (undefined method `save' for nil:NilClass):
+  
+app/controllers/sessions_controller.rb:58:in `destroySession'
+Started POST "/sessions/action" for 127.0.0.1 at 2018-05-06 22:54:38 -0500
+Processing by SessionsController#destroySession as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."authentication_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["authentication_token", "ygn-H7KJffzysqsUQf9yWB"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+NoMethodError (undefined method `save' for nil:NilClass):
+  
+app/controllers/sessions_controller.rb:58:in `destroySession'
