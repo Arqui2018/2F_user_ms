@@ -12,8 +12,15 @@ services:
       MYSQL_HOST: user_db
   user_ms:
     build: .
-    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails s -p 4001 -b '0.0.0.0'"
+    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && rails db:migrate && exec rails s -p 4001"
     ports:
       - "4001:4001"
     depends_on:
       - user_db
+    environment:
+      MYSQL_USER: apuesta
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: user
+      MYSQL_HOST: user_db
+      PORT: 4001
+      RAILS_ENV: production
