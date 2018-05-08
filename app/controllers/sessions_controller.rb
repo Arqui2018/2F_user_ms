@@ -36,25 +36,25 @@ class SessionsController < ApplicationController
     email = params[:email].downcase
     password = params[:password]
 
-    # if connect
-    #   ldap = Net::LDAP.new(
-    #           host: 'bet-ldap',
-    #           port: 389,
-    #           auth: {
-    #             method: :simple,
-    #             dn: 'cn=' + email + ', ou=worldwide,dc=arqsoft,dc=bet,dc=com,dc=co',
-    #             password: password
-    #           }
-    #         )
-    #   if ldap.bind # autentication with ldap
+    if connect
+      ldap = Net::LDAP.new(
+              host: 'bet-ldap',
+              port: 389,
+              auth: {
+                method: :simple,
+                dn: 'cn=' + email + ', ou=worldwide,dc=arqsoft,dc=bet,dc=com,dc=co',
+                password: password
+              }
+            )
+      if ldap.bind # autentication with ldap
 
         user = User.where(email: email).first
         if user&.valid_password?(password)
           return render :soap => { :email => user.email, :authentication_token => user.authentication_token, :autentication => true }
         end
 
-    #   end
-    # end
+      end
+    end
 
     render :soap => { :email => "none", :authentication_token => "none", :autentication => false }
   end
