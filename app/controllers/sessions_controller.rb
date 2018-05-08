@@ -1,25 +1,36 @@
 require 'net/ldap'
 
 class SessionsController < ApplicationController
-  soap_service namespace: 'urn:WashOutSessions', camelize_wsdl: :lower
+  soap_service namespace: 'urn:WashOutSessions'
 
   soap_action "showSession",
-                :args   => { :authenticationToken => :string },
-                :return => { :name => :string, :nickname => :string, :email => :string, :wallet_id => :integer, :autentication => :boolean }
+                :args   => { :token => :string },
+                :return => {  :id => :integer,
+                              :name => :string,
+                              :nickname => :string,
+                              :email => :string,
+                              :wallet_id => :integer,
+                              :autentication => :boolean
+                            }
 
   def showSession
+    current_user = User.where(authentication_token: params[:token]).first
 
-    user = User.where(authentication_token: params[:authenticationToken]).first
-  	if user
-  		render :soap => { :name => user.name, :nickname => user.nickname, :email => user.email, :wallet_id => user.wallet_id, :autentication => true }
+  	if current_user
+  		render :soap => { :id => current_user.id, :name => current_user.name, :nickname => current_user.nickname,
+                        :email => current_user.email, :wallet_id => current_user.wallet_id, :autentication => true
+                      }
   	else
-  		render :soap => { :name => "none", :nickname => "none", :email => "none", :wallet_id => 0, :autentication => false }
+  		render :soap => { :id => 0, :name => "none", :nickname => "none", :email => "none", :wallet_id => 0, :autentication => false }
   	end
   end
 
   soap_action "createSession",
                 :args   => { :email => :string, :password => :string },
-                :return => { :email => :string, :authentication_token => :string, :autentication => :boolean }
+                :return => {  :email => :string,
+                              :authentication_token => :string,
+                              :autentication => :boolean
+                           }
 
   def createSession
     email = params[:email].downcase
@@ -49,16 +60,17 @@ class SessionsController < ApplicationController
   end
 
   soap_action "destroySession",
-                :args   => { :authenticationToken => :string },
-                :return => { :id => :integer, :removedSession => :boolean }
+                :args   => { :token => :string },
+                :return => { :id => :integer, :autentication => :boolean }
 
   def destroySession
-    current_user = User.where(authentication_token: params[:authenticationToken]).first
+    current_user = User.where(authentication_token: params[:token]).first
   	current_user&.authentication_token = nil
-  	if current_user.save
-  		render :soap => { :id => current_user.id, :removedSession => true }
+  	if current_user
+      current_user.save
+  		render :soap => { :id => current_user.id, :autentication => true }
   	else
-  		render :soap => { :id => 0, :removedSession => false }
+  		render :soap => { :id => -1, :autentication => false }
   	end
   end
 
