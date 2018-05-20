@@ -51,8 +51,8 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: user
   username: root
-  password: 1234
-  host: user_db
+  password: '1234'
+  host: user-db
   #
   # database: user_ms_production
   # username: root
